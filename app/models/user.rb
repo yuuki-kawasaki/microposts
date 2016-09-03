@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
                                     foreign_key: "followed_id",
                                     dependent:   :destroy
   has_many :follower_users, through: :follower_relationships, source: :follower
+  has_many :likes, foreign_key: "liker_id", dependent: :destroy
+  has_many :like_microposts, through: :likes, source: :liked
   
   before_save { self.email = self.email.downcase }
   validates :name, presence: true, length: { maximum: 50 }
@@ -36,5 +38,18 @@ class User < ActiveRecord::Base
   
   def feed_items
     Micropost.where(user_id: following_user_ids + [self.id])
+  end
+  
+  def like(micropost)
+    likes.find_or_create_by(liked_id: micropost.id)
+  end
+  
+  def unlike(micropost)
+    like = likes.find_by(liked_id: micropost.id)
+    like.destroy if like
+  end
+  
+  def like?(micropost)
+    like_microposts.include?(micropost)
   end
 end

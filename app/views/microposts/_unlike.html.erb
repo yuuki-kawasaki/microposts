@@ -1,0 +1,1 @@
+<%= link_to "unlike", current_user.likes.find_by(liked_id: micropost.id), method: :delete, remote: true, class: 'unlike' %>

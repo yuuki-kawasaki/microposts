@@ -8,5 +8,10 @@
       <%= link_to "delete", micropost, method: :delete,
                                        data: { confirm: "You sure?" } %>
     <% end %>
+    <% if current_user.like?(micropost) %>
+      <%= render "microposts/unlike", micropost: micropost %>
+    <% else %>
+      <%= render "microposts/like", micropost: micropost %>
+    <% end %>
   </span>
 </li>
