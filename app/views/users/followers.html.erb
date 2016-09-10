@@ -8,7 +8,8 @@
       <span class="location"><%= @user.location %></span>
     </section>
     <%= link_to 'Profile', @user %><br>
-    <%= link_to 'Followings', followings_user_path(@user) %>
+    <%= link_to 'Followings', followings_user_path(@user) %><br>
+    <%= link_to 'Like', like_user_path(@user) %>
   </aside>
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>

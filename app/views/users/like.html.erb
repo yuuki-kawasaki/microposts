@@ -7,18 +7,17 @@
       </h1>
       <span class="location"><%= @user.location %></span>
     </section>
+    <%= link_to 'Profile', @user %><br>
     <%= link_to 'Followings', followings_user_path(@user) %><br>
-    <%= link_to 'Followers', followers_user_path(@user) %><br>
-    <%= link_to 'Like', like_user_path(@user) %>
+    <%= link_to 'Followers', followers_user_path(@user) %>
   </aside>
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
-    <% if @user.microposts.any? %>
-      <h3>Microposts (<%= @user.microposts.count %>)</h3>
+    <% if @user.like_microposts.any? %>
+      <h3>Like Microposts(<%= @user.like_microposts.count %>)</h3>
       <ol class="microposts">
-        <%= render @microposts %>
+        <%= render @like_microposts %>
       </ol>
     <% end %>
   </div>
 </div>
-

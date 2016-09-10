@@ -40,6 +40,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @follower_users = @user.follower_users
   end
+  
+  def like
+    @user = User.find(params[:id])
+    @like_microposts = @user.like_microposts
+  end
 
   private
 
